@@ -4,11 +4,18 @@ Creating Web App Using Zend 2 Framework Include CURD Application for Books By Fo
 
 To Run Web Application First Clone the project :
 
-``` git clone https://github.com/ahmed-hamdy90/build_web_app_using_Zend_2.git ```
+```
+ git clone https://github.com/ahmed-hamdy90/build_web_app_using_Zend_2.git 
+ 
+```
 
 Then install project dependancies using Composer By Run command 
 
-``` php composer.phar install ```
+``` 
+
+php composer.phar install
+
+```
 
 Don`t forget to create Database for web application By import SQL file -> [database.sql file] (http://)
 
