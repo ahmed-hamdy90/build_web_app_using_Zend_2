@@ -1,14 +1,22 @@
 {
-    "name": "zendframework/skeleton-application",
-    "description": "Skeleton Application for ZF2",
-    "license": "BSD-3-Clause",
+    "name": "ahmed-hamdy90/build_web_app_using_Zend_2",
+    "description": "Build web Application Using Zend 2 framework",
     "keywords": [
         "framework",
         "zf2"
     ],
-    "homepage": "http://framework.zend.com/",
+    "homepage": "https://github.com/ahmed-hamdy90/build_web_app_using_Zend_2",
+    "authors": [
+        {
+            "name": "Ahmed Hamdy",
+            "email": "ahmedhamdy20@gmail.com",
+            "homepage": "https://github.com/ahmed-hamdy90",
+            "role": "Developer"
+        }
+    ],
     "require": {
         "php": ">=5.5",
-        "zendframework/zendframework": "~2.5"
+        "zendframework/zendframework": "~2.5",
+        "zendframework/zftool": "dev-master"
     }
 }
