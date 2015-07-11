@@ -8,11 +8,11 @@ To Run Web Application First Clone the project :
  git clone https://github.com/ahmed-hamdy90/build_web_app_using_Zend_2.git
 ```
 
-Then install project dependancies using Composer By Run command 
+Then install project dependancies using Composer
 
 ``` 
 php composer.phar install
 ```
 
-Don`t forget to create Database for web application By import SQL file -> [database.sql file] (http://)
+Don`t forget to create Database for web application By import SQL file -> [database.sql file] (https://github.com/ahmed-hamdy90/build_web_app_using_Zend_2/blob/master/database.sql)
 
