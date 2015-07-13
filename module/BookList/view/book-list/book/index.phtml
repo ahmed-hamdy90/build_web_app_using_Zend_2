@@ -1,1 +1,30 @@
-In index.phtml
+<?php
+  $title = "My Books";
+  $this->headTitle($title);
+?>
+
+<h1>My Book List</h1>
+
+<p>
+    <a href="<?php echo $this->url('book', array('action' => 'add')); ?>">Add new book</a>
+</p>
+
+<table class="table">
+    <tr>
+        <td>Title</td>
+        <td>Author</td>
+        <td></td>
+    </tr>
+    <?php foreach($books as $book) : ?>
+        <tr>
+            <td><?php echo $this->escapeHtml($book->title) ?></td>
+            <td><?php echo $this->escapeHtml($book->author) ?></td>
+            <td>
+                <a href="<?php echo $this->url('book',
+                    array('action'=> 'edit', 'id' => $book->id)) ?>">Edit</a>
+                <a href="<?php echo $this->url('book',
+                    array('action'=> 'delete', 'id' => $book->id)) ?>">Delete</a>
+            </td>
+        </tr>
+    <?php endforeach; ?>
+</table>
