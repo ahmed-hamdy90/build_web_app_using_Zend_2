@@ -1,1 +1,28 @@
-In delete.phtml
+<?php
+    $title = "Delete Book";
+    $this->headTitle($title);
+?>
+
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+
+<p> Are you sure that you want to delete
+        '<?php //echo $this->escapeHtml($book->title); ?>' ?
+</p>
+
+<?php
+    $url = $this->url(
+        'book',
+        array(
+            'action' => 'delete',
+            'id' => $id
+        )
+    );
+?>
+
+<form action="<?= $url; ?>" method="post" >
+    <div>
+        <input type="hidden" name="id" value="<?php //echo (int) $book->id; ?>">
+        <input type="submit" name="del" value="Yes">
+        <input type="submit" name="del" value="No">
+    </div>
+</form>
