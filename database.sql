@@ -2,6 +2,8 @@ CREATE DATABASE IF NOT EXISTS learning_zend_2;
 
 USE learning_zend_2;
 
+-- Create Tables in learning_zend_2
+
 CREATE TABLE IF NOT EXISTS book (
    `id`     int NOT NULL AUTO_INCREMENT,
    `title`  varchar(225) NOT NULL,
@@ -16,3 +18,13 @@ CREATE TABLE IF NOT EXISTS album (
    PRIMARY KEY (id)
 );
 
+-- Insert Dummy Data for book Table
+
+INSERT INTO book (`title`, `author`) VALUES ('Duty: Memories of a secretary at War', 'Robert Michael Gates');
+INSERT INTO book (`title`, `author`) VALUES ('A Short Guide to a Long Life', 'David Agus');
+INSERT INTO book (`title`, `author`) VALUES ('Lone Survivor', 'Marcus Luttrell');
+INSERT INTO book (`title`, `author`) VALUES ('Divergent', 'Veronica Roth');
+INSERT INTO book (`title`, `author`) VALUES ('The Fault in Our Stars', 'John Green');
+INSERT INTO book (`title`, `author`) VALUES ('The Goldfinch', 'Donna Tartt');
+INSERT INTO book (`title`, `author`) VALUES ('The Invention of Wings:A Novel', 'Sue Monk Kidd');
+INSERT INTO book (`title`, `author`) VALUES ('The Book Thief', 'Markus Zusak');
