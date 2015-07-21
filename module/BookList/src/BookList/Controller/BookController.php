@@ -3,11 +3,18 @@
 namespace BookList\Controller;
 
 use BookList\Form\BookForm;
+use BookList\Model\BookTable;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
 class BookController extends AbstractActionController
 {
+    /**
+     * BookTable Object
+     * @var BookTable
+     */
+    protected $_bookTable;
+
     /**
      * Index Action
      * <br/> Responsible for Display List of Books which saved into DataBase
@@ -16,7 +23,7 @@ class BookController extends AbstractActionController
     public function indexAction()
     {
         return new ViewModel(array(
-            'books' => []
+            'books' => $this->getBookTable()->fetchAll()
         ));
     }
 
@@ -101,6 +108,22 @@ class BookController extends AbstractActionController
             'id'   => $id,
             //'book' => $book
         ));
+    }
+
+    /**
+     * Get BookTable Object Using Service Manager
+     * @return BookTable
+     */
+    public function getBookTable()
+    {
+        if (!$this->_bookTable) {
+
+            // get Service Locator Manager
+            $sm = $this->getServiceLocator();
+            $this->_bookTable = $sm->get('BookList\Model\BookTable');
+        }
+
+        return $this->_bookTable;
     }
 
 }
