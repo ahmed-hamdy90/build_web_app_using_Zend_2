@@ -7,16 +7,17 @@
 
 <?php
 
+    $form = $this->form; 
     $form->setAttribute('action', $this->url(
         'book',
         array(
-            'action'=> 'edit',
-            'id' => $this->id
+            'action' => 'edit',
+            'id'     => $this->id
         )
     ));
     $form->prepare();
 
-    echo $this->form()->openTag();
+    echo $this->form()->openTag($form);
     echo $this->formHidden($form->get('id'));
     echo $this->formRow($form->get('title'));
     echo $this->formRow($form->get('author'));

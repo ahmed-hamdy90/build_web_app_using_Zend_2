@@ -3,6 +3,7 @@
 namespace BookList\Controller;
 
 use BookList\Form\BookForm;
+use BookList\Model\Book;
 use BookList\Model\BookTable;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
@@ -46,6 +47,18 @@ class BookController extends AbstractActionController
         // Check If request is Post verb
         if ($request->isPost()) {
 
+            $book = new Book();
+            $form->setInputFilter($book->getInputFilter());
+            $form->setData($request->getPost());
+            
+            if ($form->isValid()) {
+                   
+                $book->exchangeArray($form->getData());
+                $this->getBookTable()->saveBook($book);
+            }
+            
+            // redirect to list of books
+            return $this->redirect()->toRoute('book');
         }
 
         return new ViewModel(array(
@@ -64,15 +77,26 @@ class BookController extends AbstractActionController
      */
     public function editAction()
     {
-        $id = (int) $this->params()->fromRoute('id', 0);
+        $id   = (int) $this->params()->fromRoute('id', 0);
+        $book = $this->getBookTable()->getBook($id);
+        
         $form = new BookForm();
-            //$form->bind($book);
+            $form->bind($book);
             $form->get('submit')->setValue('Edit');
 
         $request = $this->getRequest();
         // Check If Request Is Post Verb
         if ($request->isPost()) {
 
+            $form->setInputFilter($book->getInputFilter());
+            $form->setData($request->getPost());
+            
+            if ($form->isValid()) {
+                
+                $this->getBookTable()->saveBook($book);
+                // redirect to list of Books
+                return $this->redirect()->toRoute('book');
+            }
         }
 
         return new ViewModel(array(
@@ -102,11 +126,20 @@ class BookController extends AbstractActionController
         // Check If Request if Post Verb
         if ($request->isPost()) {
 
+            $del = $this->params()->fromPost('del', 'No');
+            
+            if ($del == 'Yes') {
+             
+                $id = (int) $this->params()->fromPost('id', 0);
+                $this->getBookTable()->deleteBook($id);
+            }            
+            // redirect to list of books
+            $this->redirect()->toRoute('book');
         }
 
         return new ViewModel(array(
             'id'   => $id,
-            //'book' => $book
+            'book' => $this->getBookTable()->getBook($id)
         ));
     }
 
