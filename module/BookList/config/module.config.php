@@ -8,6 +8,19 @@ return array(
     ),
     'router' => array(
         'routes' => array(
+            // Move Home Route for Book List Application 
+            // From module/Application/config/modue.config.php file
+            // To   module/BookList/config/module.config.php file 
+            'home' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route'    => '/',
+                    'defaults' => array(
+                        'controller' => 'BookList\Controller\Book',
+                        'action'     => 'index',
+                    ),
+                ),
+            ),
             'book' => array(
                 'type'    => 'segment',
                 'options' => array(
