@@ -44,6 +44,16 @@
             </div>
         </nav>
         <div class="container">
+            <!-- Output breadcrumb for web Site -->
+            <?php
+            echo $this->navigation('navigation')
+                      ->breadcrumbs()
+                      ->setMinDepth(0)
+                      ->setPartial(array(
+                          'partial/breadcrumb.phtml',
+                          'Book'
+                      ));
+            ?>
             <?php echo $this->content; ?>
             <hr>
             <footer>

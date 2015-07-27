@@ -37,6 +37,42 @@ return array(
             ),
         ),
     ),
+    // Create SiteMap navigation for BookList Module
+    'navigation' => array(
+        'default' => array(
+            array(
+                'label' => 'Home',
+                'route' => 'home'
+            ),
+            array(
+                'label' => 'Book',
+                'route' => 'book',
+                'pages' => array(
+                    array(
+                        'label'  => 'Add',
+                        'route'  => 'book',
+                        'action' => 'add'
+                    ),
+                    array(
+                        'label'  => 'Edit',
+                        'route'  => 'book',
+                        'action' => 'edit'
+                    ),
+                    array(
+                        'label'  => 'Delete',
+                        'route'  => 'book',
+                        'action' => 'delete'
+                    )
+                )
+            )
+        )
+    ),
+    'service_manager' => array(
+        'factories' => array(
+            // import navigation Factory Which Used to create BreadCrumb
+            'navigation' => 'Zend\Navigation\Service\DefaultNavigationFactory'
+        ),
+    ),
     'view_manager' => array(
         'template_path_stack' => array(
             'book' => __DIR__ . '/../view',
