@@ -2,7 +2,11 @@
 
  namespace BookList\Model;
 
+ use Zend\Db\ResultSet\ResultSet;
+ use Zend\Db\Sql\Select;
  use Zend\Db\TableGateway\TableGateway;
+ use Zend\Paginator\Adapter\DbSelect;
+ use Zend\Paginator\Paginator;
 
  /**
   * BookTable
@@ -24,10 +28,25 @@
 
      /**
       * Fetch All Books Rows form book table into Database
-      * @return \Zend\Db\ResultSet\ResultSet
+      * @param boolean $paginated flag for apply pagination on retrieving Book Rows from book table or not
+      * @return ResultSet|Paginator
       */
-     public function fetchAll()
+     public function fetchAll($paginated=false)
      {
+         if ($paginated) {
+
+             $select = new Select('book');
+             $resultSetPrototype = new ResultSet();
+             $resultSetPrototype->setArrayObjectPrototype(new Book());
+             $paginatorAdapter = new DbSelect(
+                 $select,
+                 $this->_tableGateway->getAdapter(),
+                 $resultSetPrototype
+             );
+             $paginator = new Paginator($paginatorAdapter);
+             return $paginator;
+         }
+
          $resultSet = $this->_tableGateway->select();
          return $resultSet;
      }

@@ -15,7 +15,9 @@
         <td>Author</td>
         <td></td>
     </tr>
-    <?php foreach($books as $book) : ?>
+    <?php foreach($this->paginator as $book) : ?>
+    <!-- loop on All Books Before Using Paginator Logic to Display Books -->
+    <?php //foreach($books as $book) : ?>
         <tr>
             <td><?php echo $this->escapeHtml($book->title) ?></td>
             <td><?php echo $this->escapeHtml($book->author) ?></td>
@@ -28,3 +30,19 @@
         </tr>
     <?php endforeach; ?>
 </table>
+<?php
+    // Call Pagination Control to create pagination layout
+    // take parameters [ paginator object,
+    //                   the scrolling style(three four scrolling style according to zend/paginator documentation),
+    //                   partial layout for paginator,
+    //                   the route which used into paginator links
+    // ]
+    echo $this->paginationControl(
+        $this->paginator,
+        'sliding',
+        array('partial/paginator.phtml', 'book'),
+        array(
+            'route' => 'book'
+        )
+    );
+?>
