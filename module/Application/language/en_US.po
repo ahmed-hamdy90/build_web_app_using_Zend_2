@@ -151,3 +151,11 @@ msgstr ""
 msgid "Exception"
 msgstr ""
 
+#: ../../../BookList/view/book-list/book/index.phtml:14
+msgid "Title"
+msgstr "Title"
+
+#: ../../../BookList/view/book-list/book/index.phtml:15
+msgid "Author"
+msgstr "Author"
+

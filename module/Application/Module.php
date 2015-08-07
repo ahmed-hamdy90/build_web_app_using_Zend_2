@@ -19,6 +19,12 @@ class Module
         $eventManager        = $e->getApplication()->getEventManager();
         $moduleRouteListener = new ModuleRouteListener();
         $moduleRouteListener->attach($eventManager);
+        
+        $tanslator = $e->getApplication()
+                       ->getServiceManager()
+                       ->get('translator');
+        $tanslator->setLocale(\Locale::acceptFromHttp($_SERVER['HTTP_ACCEPT_LANGUAGE']))
+                  ->setFallBackLocale('en_US');
     }
 
     public function getConfig()

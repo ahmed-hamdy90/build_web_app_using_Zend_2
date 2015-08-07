@@ -109,3 +109,10 @@ msgstr "se resuelve a %s"
 msgid "Exception"
 msgstr "Excepción"
 
+#: ../../../BookList/view/book-list/book/index.phtml:14
+msgid "Title"
+msgstr "Titulo"
+
+#: ../../../BookList/view/book-list/book/index.phtml:15
+msgid "Author"
+msgstr "Autor"
