@@ -7,6 +7,7 @@ use BookList\Model\Book;
 use BookList\Model\BookTable;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
+use Zend\Mail;
 
 class BookController extends AbstractActionController
 {
@@ -67,6 +68,16 @@ class BookController extends AbstractActionController
                    
                 $book->exchangeArray($form->getData());
                 $this->getBookTable()->saveBook($book);
+                
+                //Send an email when a new book Was Added
+                $mail = new Mail\Message();
+                $mail->setBody('A new Book called '.$book->title.' has been added.');
+                $mail->setFrom('ahmedhamdy20@gmail.com', 'Zend course');
+                $mail->addTo('ahmedhamdy20@gmail.com', 'Ahmed Hamdy');
+                $mail->setSubject('A Book was Added');
+                
+                $transport = new Mail\Transport\Sendmail();
+                $transport->send($mail);
             }
             
             // redirect to list of books
