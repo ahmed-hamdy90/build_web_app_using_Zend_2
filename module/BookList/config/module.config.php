@@ -70,7 +70,23 @@ return array(
     'service_manager' => array(
         'factories' => array(
             // import navigation Factory Which Used to create BreadCrumb
-            'navigation' => 'Zend\Navigation\Service\DefaultNavigationFactory'
+            'navigation' => 'Zend\Navigation\Service\DefaultNavigationFactory',
+            // import authentication Adapter Factory
+            // Which used to create basic Http Authentication on Book List Module
+            'AuthenticationAdapter' => 'BookList\Factory\AuthenticationAdapterFactory'
+        ),
+    ),
+    // Http Authentication Configuration
+    'book_app' => array(
+        'auth_adapter' => array(
+            'config' => array(
+                'accept_schemes' => 'basic digest',
+                'realm'          => 'Book List Site',
+                'digest_domains' => '/book',
+                'nonce_timeout'  => 3600,
+            ),
+            'basic_passwd_file'  => __DIR__ . '/real/basic_passwd.txt',
+            'digest_passwd_file' => __DIR__ . '/real/digest_passwd.txt',            
         ),
     ),
     'view_manager' => array(

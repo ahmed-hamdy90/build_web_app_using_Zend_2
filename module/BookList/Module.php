@@ -6,13 +6,57 @@ use BookList\Model\Book;
 use BookList\Model\BookTable;
 use Zend\Db\ResultSet\ResultSet;
 use Zend\Db\TableGateway\TableGateway;
+use Zend\Mvc\MvcEvent;
+use Zend\Mvc\ModuleRouteListener;
+use Zend\ModuleManager\Feature\ConfigProviderInterface;
+use Zend\ModuleManager\Feature\BootstrapListenerInterface;
+use Zend\EventManager\EventInterface;
+use Zend\Http\Request  as HttpRequest;
+use Zend\Http\Response as HttpResponse;
 
 /**
  * Book List Module Class
  * @author ahmed hamdy <ahmedhamdy20@gamil.com>
  */
-class Module
+class Module implements ConfigProviderInterface, BootstrapListenerInterface
 {
+    /**
+     * On BootStrap Listener for Book List Module
+     * @param EventInterface $event Event Manager Object 
+     */
+    public function onBootstrap(EventInterface $event)
+    {        
+        $appliaction    = $event->getTarget();
+        $serviceManager = $appliaction->getServiceManager();
+        
+        $appliaction
+            ->getEventManager()
+            ->attach(MvcEvent::EVENT_DISPATCH, function (MvcEvent $e) use ($serviceManager) {
+                $request  = $e->getRequest();
+                $response = $e->getResponse();
+                
+                if (!($request instanceof HttpRequest && $response instanceof HttpResponse)) {
+                    return; // we are not in HTTP context - CLI application?
+                }
+                
+                $authAdapter = $serviceManager->get('AuthenticationAdapter');
+                $authAdapter->setRequest($request);
+                $authAdapter->setResponse($response);
+                $result = $authAdapter->authenticate();                
+
+                // Then check the result of basic Http authentication 
+                if ($result->isValid()) {
+                    return; // erverything OK   
+                }
+                // Otherwise return Access Denaid to Book List Site
+                $response->setContent('Access Denied');
+                $response->setStatusCode(HttpResponse::STATUS_CODE_401);
+
+                $e->setResult($response); // short-circuit to application to end
+                return false; // stop event propagation  
+            });        
+    }  
+    
     /**
      * Get AutoLoader Configuration
      * <br/> responsible for load autoloader file
