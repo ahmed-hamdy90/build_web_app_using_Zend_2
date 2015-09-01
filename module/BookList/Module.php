@@ -82,7 +82,7 @@ class Module implements ConfigProviderInterface, BootstrapListenerInterface
     * Get Configuration
     * <br/> responsible for include module.config file 
     *       which contains configuration for BookList Module   
-    * @return string
+    * @return mixed
     */
     public function getConfig()
     {

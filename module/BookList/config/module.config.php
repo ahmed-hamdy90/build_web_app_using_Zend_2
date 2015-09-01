@@ -2,9 +2,9 @@
 
 return array(
     'controllers' => array(
-          'invokables' => array(
-               'BookList\Controller\Book' => 'BookList\Controller\BookController',
-          ),
+        'invokables' => array(
+            'BookList\Controller\Book' => 'BookList\Controller\BookController',
+        ),
     ),
     'router' => array(
         'routes' => array(
