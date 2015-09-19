@@ -28,3 +28,11 @@ INSERT INTO book (`title`, `author`) VALUES ('The Fault in Our Stars', 'John Gre
 INSERT INTO book (`title`, `author`) VALUES ('The Goldfinch', 'Donna Tartt');
 INSERT INTO book (`title`, `author`) VALUES ('The Invention of Wings:A Novel', 'Sue Monk Kidd');
 INSERT INTO book (`title`, `author`) VALUES ('The Book Thief', 'Markus Zusak');
+
+-- Insert Dummy Data for Album Table
+
+INSERT INTO album (`title`, `artist`) VALUES ('In My Dreams', 'The Military Wives'); 
+INSERT INTO album (`title`, `artist`) VALUES ('21', 'Adele'); 
+INSERT INTO album (`title`, `artist`) VALUES ('Wrecking Ball (Deluxe)', 'Bruce Springsteen'); 
+INSERT INTO album (`title`, `artist`) VALUES ('Born To Die', 'Lana Del Ray'); 
+INSERT INTO album (`title`, `artist`) VALUES ('Making Mirrors', 'Gotye'); 
