@@ -2,6 +2,7 @@
 
 namespace Album\Controller;
 
+use Album\Model\AlbumTable;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
@@ -13,13 +14,21 @@ use Zend\View\Model\ViewModel;
 class AlbumController extends AbstractActionController
 {
     /**
+     * Album Table instance 
+     * @var AlbumTable 
+     */
+    protected $albumTable;
+    
+    /**
      * Index Action 
      * <br/> Used to Display Album List
      * @return ViewModel index view
      */
     public function indexAction()
     {        
-        return new ViewModel();
+        return new ViewModel(array(
+           'albums' => $this->getAlbumTable()->fetchAll()
+        ));
     }
     
     /**
@@ -50,5 +59,18 @@ class AlbumController extends AbstractActionController
     public function deleteAction()
     {
         return new ViewModel();        
+    }
+    
+    /**
+     * Get AlbumTable Instance 
+     * @return AlbumTable
+     */
+    public function getAlbumTable() 
+    {
+        if (!$this->albumTable) {
+            $sm = $this->getServiceLocator();
+            $this->albumTable = $sm->get('Album\Model\AlbumTable');
+        }
+        return $this->albumTable;
     }        
 }
