@@ -1,5 +1,4 @@
 <?php
-
 namespace BookList\Factory;
 
 use Zend\ServiceManager\FactoryInterface;

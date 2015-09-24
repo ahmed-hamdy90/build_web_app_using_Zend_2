@@ -1,5 +1,4 @@
 <?php
-
 namespace BookList;
 
 use BookList\Model\Book;
@@ -7,7 +6,6 @@ use BookList\Model\BookTable;
 use Zend\Db\ResultSet\ResultSet;
 use Zend\Db\TableGateway\TableGateway;
 use Zend\Mvc\MvcEvent;
-use Zend\Mvc\ModuleRouteListener;
 use Zend\ModuleManager\Feature\ConfigProviderInterface;
 use Zend\ModuleManager\Feature\BootstrapListenerInterface;
 use Zend\EventManager\EventInterface;
@@ -121,5 +119,4 @@ class Module implements ConfigProviderInterface, BootstrapListenerInterface
         );
 
     }
-
 }

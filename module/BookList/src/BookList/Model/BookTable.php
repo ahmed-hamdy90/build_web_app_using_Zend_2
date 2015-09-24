@@ -1,5 +1,4 @@
 <?php
-
  namespace BookList\Model;
 
  use Zend\Db\ResultSet\ResultSet;
@@ -15,7 +14,7 @@
   */
  class BookTable
  {
-     protected $_tableGateway;
+     protected $tableGateway;
 
      /**
       * Book Table Constructor
@@ -23,7 +22,7 @@
       */
      public function __construct(TableGateway $tableGateway)
      {
-         $this->_tableGateway = $tableGateway;
+         $this->tableGateway = $tableGateway;
      }
 
      /**
@@ -40,14 +39,14 @@
              $resultSetPrototype->setArrayObjectPrototype(new Book());
              $paginatorAdapter = new DbSelect(
                  $select,
-                 $this->_tableGateway->getAdapter(),
+                 $this->tableGateway->getAdapter(),
                  $resultSetPrototype
              );
              $paginator = new Paginator($paginatorAdapter);
              return $paginator;
          }
 
-         $resultSet = $this->_tableGateway->select();
+         $resultSet = $this->tableGateway->select();
          return $resultSet;
      }
 
@@ -61,7 +60,7 @@
      {
          $bookId = (int) $id;
 
-         $rowSet = $this->_tableGateway->select(array('id' => $bookId));
+         $rowSet = $this->tableGateway->select(array('id' => $bookId));
          $row    = $rowSet->current();
 
          if (!$row) {
@@ -88,12 +87,12 @@
 
          if ($bookId == 0) {
 
-             $this->_tableGateway->insert($bookData);
+             $this->tableGateway->insert($bookData);
          } else {
 
              if ($this->getBook($bookId)) {
 
-                 $this->_tableGateway->update($bookData, array('id' => $bookId));
+                 $this->tableGateway->update($bookData, array('id' => $bookId));
              } else {
 
                  throw new \Exception('Book Id Does not Exists');
@@ -109,7 +108,6 @@
      {
          $bookId = (int) $id;
 
-         $this->_tableGateway->delete(array('id' => $bookId));
+         $this->tableGateway->delete(array('id' => $bookId));
      }
-
  }

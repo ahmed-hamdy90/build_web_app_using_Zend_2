@@ -1,5 +1,4 @@
 <?php
-
 namespace Album\Model;
 
 use Zend\Db\TableGateway\TableGateway;
@@ -13,7 +12,7 @@ use Album\Model\Album;
  */
 class AlbumTable
 {
-    protected $_tableGateway;
+    protected $tableGateway;
     
     /**
      * Album Table Constructor
@@ -21,7 +20,7 @@ class AlbumTable
      */
     public function __construct(TableGateway $tableGateway)
     {
-        $this->_tableGateway = $tableGateway;
+        $this->tableGateway = $tableGateway;
     }   
     
     /**
@@ -30,7 +29,7 @@ class AlbumTable
      */
     public function fetchAll()
     { 
-       $resultSet = $this->_tableGateway->select();
+       $resultSet = $this->tableGateway->select();
        return $resultSet;
     }
     
@@ -44,7 +43,7 @@ class AlbumTable
     public function getAlbum($id)
     {
         $id = (int) $id;
-        $rowSet = $this->_tableGateway->select(array('id' => $id));
+        $rowSet = $this->tableGateway->select(array('id' => $id));
         $row    = $rowSet->current();
         
         if (!row) {
@@ -71,10 +70,10 @@ class AlbumTable
         $id = (int) $album->id;
         
         if ($id == 0) {
-            $this->_tableGateway->insert($data);
+            $this->tableGateway->insert($data);
         } else {            
             if ($this->getAlbum($id)) {
-                $this->_tableGateway->update($data, array('id' => $id));
+                $this->tableGateway->update($data, array('id' => $id));
             } else {
                 throw new Exception("Album id does not exist");
             }
@@ -88,6 +87,6 @@ class AlbumTable
     public function deleteAlbum($id)
     {
         $id = (int) $id;
-        $this->_tableGateway->delete(array('id' => $id));
+        $this->tableGateway->delete(array('id' => $id));
     }        
 }

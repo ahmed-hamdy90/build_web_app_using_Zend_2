@@ -1,5 +1,4 @@
 <?php
-
  namespace BookList\Model;
 
  use Zend\InputFilter\InputFilterAwareInterface;
@@ -16,7 +15,7 @@
      public $id;
      public $title;
      public $author;
-     protected $_inputFilter;
+     protected $inputFilter;
 
     /**
      * Exchange(ReSetting) parameters of Book Object
@@ -57,7 +56,7 @@
     public function getInputFilter()
     {
      
-        if (!$this->_inputFilter) {
+        if (!$this->inputFilter) {
             
             $inputFilter = new InputFilter();
             
@@ -107,10 +106,9 @@
                )                
             ));
             
-            $this->_inputFilter = $inputFilter;
+            $this->inputFilter = $inputFilter;
         }
         
-        return $this->_inputFilter;
-    }
-    
+        return $this->inputFilter;
+    }    
  }

@@ -1,5 +1,4 @@
 <?php
-
 namespace BookList\Form;
 
 use Zend\Form\Form;
@@ -45,5 +44,4 @@ class BookForm extends Form
             )
         ));
     }
-
 }

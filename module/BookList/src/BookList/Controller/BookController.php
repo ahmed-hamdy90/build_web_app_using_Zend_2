@@ -1,5 +1,4 @@
 <?php
-
 namespace BookList\Controller;
 
 use BookList\Form\BookForm;
@@ -15,7 +14,7 @@ class BookController extends AbstractActionController
      * BookTable Object
      * @var BookTable
      */
-    protected $_bookTable;
+    protected $bookTable;
 
     /**
      * Index Action
@@ -172,14 +171,13 @@ class BookController extends AbstractActionController
      */
     public function getBookTable()
     {
-        if (!$this->_bookTable) {
+        if (!$this->bookTable) {
 
             // get Service Locator Manager
             $sm = $this->getServiceLocator();
-            $this->_bookTable = $sm->get('BookList\Model\BookTable');
+            $this->bookTable = $sm->get('BookList\Model\BookTable');
         }
 
-        return $this->_bookTable;
+        return $this->bookTable;
     }
-
 }
