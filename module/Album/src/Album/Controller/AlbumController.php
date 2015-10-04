@@ -1,7 +1,9 @@
 <?php
 namespace Album\Controller;
 
+use Album\Model\Album;
 use Album\Model\AlbumTable;
+use Album\Form\AlbumForm;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
@@ -36,8 +38,27 @@ class AlbumController extends AbstractActionController
      * @return ViewModel add View 
      */
     public function addAction()
-    {        
-        return new ViewModel();        
+    {
+        $form = new AlbumForm();
+        $form->get('submit')->setValue('Add');
+
+        $request = $this->getRequest();
+        if ($request->isPost()) {
+            $album = new Album();
+            $form->setInputFilter($album->getInputFilter());
+            $form->setData($request->getPost());
+
+            if ($form->isValid()) {
+                $album->exchangeArray($form->getData());
+                $this->getAlbumTable()->saveAlbum($album);
+
+                // Redirect to list of album
+                return $this->redirect()->toRoute('album');
+            }
+        }
+        return new ViewModel(array(
+            'form' => $form
+        ));
     }        
     
     /**
