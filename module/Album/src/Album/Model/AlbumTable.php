@@ -1,9 +1,8 @@
 <?php
 namespace Album\Model;
 
+use Zend\Db\ResultSet\ResultSet;
 use Zend\Db\TableGateway\TableGateway;
-use Zend\Db\ResultSet;
-use Album\Model\Album;
 
 /**
  * Album Table
@@ -46,7 +45,7 @@ class AlbumTable
         $rowSet = $this->tableGateway->select(array('id' => $id));
         $row    = $rowSet->current();
         
-        if (!row) {
+        if (!$row) {
             throw new \Exception("Could not find row $id");
         }
         
@@ -57,7 +56,7 @@ class AlbumTable
      * Insert a new Album row into Album Table in Database
      * OR Update an Exists Album row into Album Table
      * @param Album $album Album Object
-     * @throws Exception If There is not Album row in Album table with given Id
+     * @throws \Exception If There is not Album row in Album table with given Id
      *                   <br/> When Update an Exists Album row.
      */
     public function saveAlbum(Album $album)
@@ -75,7 +74,7 @@ class AlbumTable
             if ($this->getAlbum($id)) {
                 $this->tableGateway->update($data, array('id' => $id));
             } else {
-                throw new Exception("Album id does not exist");
+                throw new \Exception("Album id does not exist");
             }
         }
     }
