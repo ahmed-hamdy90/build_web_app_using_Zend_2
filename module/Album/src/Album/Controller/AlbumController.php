@@ -68,6 +68,22 @@ class AlbumController extends AbstractActionController
      */
     public function editAction()
     {
+        $id = (int) $this->params()->fromRoute('id', 0);
+        if (!$id) {
+            return $this->redirect()->toRoute('album', array(
+                'action' => 'add'
+            ));
+        }
+
+        // Get the album with the specified id.
+        // An Exception is thrown if it connot be found, in which case go to index page
+        try {
+            $album = $this->getAlbumTable()->getAlbum($id);
+        } catch (\Exception $e) {
+            return $this->redirect()->toRoute('album', array(
+                'action' => 'index'
+            ));
+        }
         return new ViewModel();        
     }        
     
