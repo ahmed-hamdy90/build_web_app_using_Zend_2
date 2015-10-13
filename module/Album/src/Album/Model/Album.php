@@ -30,7 +30,16 @@ class Album implements InputFilterAwareInterface
         $this->title  = (!empty($data['title'])) ? $data['title']: null; 
         $this->artist = (!empty($data['artist'])) ? $data['artist']: null; 
     }
-    
+
+    /**
+     * Get Properties of Album Entity Object as an array
+     * @return array
+     */
+    public function getArrayCopy()
+    {
+        return get_object_vars($this);
+    }
+
     /**
      * {@inheritDoc}
      * @throws \Exception when calling this function

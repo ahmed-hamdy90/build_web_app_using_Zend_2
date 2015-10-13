@@ -52,7 +52,7 @@ class AlbumController extends AbstractActionController
                 $album->exchangeArray($form->getData());
                 $this->getAlbumTable()->saveAlbum($album);
 
-                // Redirect to list of album
+                // Redirect to list of albums
                 return $this->redirect()->toRoute('album');
             }
         }
@@ -84,7 +84,29 @@ class AlbumController extends AbstractActionController
                 'action' => 'index'
             ));
         }
-        return new ViewModel();        
+
+        $form = new AlbumForm();
+        $form->bind($album);
+        $form->get('submit')->setAttribute('value', 'Edit');
+        // Or also can change Submit button value using setValue() method like into AddAction
+        // $form->get('submit')->setValue('Edit');
+
+        $request = $this->getRequest();
+        if ($request->isPost()) {
+            $form->setInputFilter($album->getInputFilter());
+            $form->setData($request->getPost());
+
+            if ($form->isValid()) {
+                $this->getAlbumTable()->saveAlbum($album);
+
+                // Redirect to list of albums
+                return $this->redirect()->toRoute('album');
+            }
+        }
+        return new ViewModel(array(
+            'id'   => $id,
+            'form' => $form
+        ));
     }        
     
     /**
